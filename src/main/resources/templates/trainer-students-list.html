@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Профиль</title>
+</head>
+</head>
+
+<body class="d-flex flex-column h-100" style="margin-bottom: 200px;">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+      <div class="head_wrap">
+        <h1 th:text="${user.name} + ' ' + ${user.surname}"></h1>
+      </div>
+    </div>
+
+    <div style="overflow:auto;">
+
+      <div class="container px-5">
+        <div class="nav nav-tabs d-flex justify-content-between">
+          <div class="nav-items d-flex">
+            <div class="nav-item">
+              <a th:href="@{/users/profile/info}" class="nav-link">
+                <b class="p1">Профиль</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/diary/{date}(date=${localDate})}" class="nav-link">
+                <b class="p1">Дневник</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/training-program}" class="nav-link">
+                <b class="p1">Программа</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/training-stats}" class="nav-link">
+                <b class="p1">Статистика</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students}" class="nav-link active">
+                <b class="p1">Ученики</b>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="container px-5 my-5" style="width: 1250px; ">
+
+      <div class="row gx-5">
+
+      <div th:each="user : ${users}" class="col-lg-4 mb-2" th:if="${user.role.equals(user.role.STUDENT)}">
+        <div class="d-flex flex-column align-items-center mb-3">
+          <a th:text="${user.name} + ' ' + ${user.surname}"
+             class="h3 fw-bolder text-decoration-none link-dark mb-2"
+             th:href="@{/users/profile/trainer/students/{userId}/profile(userId=${user.id})}">
+          </a>
+          <img class="img-fluid rounded-3"
+               th:src="@{/images/}+${user.filename}"
+               alt="..." width="60%" height="60%"/>
+        </div>
+      </div>
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+  </section>
+
+</main>
+
+
+
+</body>
+
+
+
+</html>

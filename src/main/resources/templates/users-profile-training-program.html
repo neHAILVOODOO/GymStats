@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"
+
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}">
+<head>
+  <title>Программа</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/users-profile-training-program.js}"></script>
+</head>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+      <div class="head_wrap">
+        <h1 th:text="${user.name} + ' ' + ${user.surname}"></h1>
+      </div>
+    </div>
+
+    <div style="overflow:auto;">
+
+      <div class="container px-5">
+        <div class="nav nav-tabs d-flex justify-content-start">
+          <div class="nav-item">
+            <a th:href="@{/users/profile/info}" class="nav-link">
+              <b class="p1">Профиль</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/diary/{date}(date=${localDate})}" class="nav-link">
+              <b class="p1">Дневник</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/training-program}" class="nav-link active">
+              <b class="p1">Программа</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/training-stats}" class="nav-link">
+              <b class="p1">Статистика</b>
+            </a>
+          </div>
+          <div class="nav-item" sec:authorize="hasAnyRole('ROLE_TRAINER', 'ROLE_FOUNDER')">
+            <a th:href="@{/users/profile/trainer/students}"  class="nav-link">
+              <b class="p1">Ученики</b>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <form th:object="${wrapper}" th:action="@{/users/profile/training-program}" method="post" enctype="multipart/form-data" id="form">
+
+    <div class="container d-flex justify-content-center" style="flex-direction: row;">
+
+      <div class="container align-items-center" style="width: 1250px; margin-left: auto; margin-right: auto;">
+
+        <div class="row justify-content-center" style="display: flex; flex-direction: row;">
+
+          <div style="width: 450px; margin-bottom: 20px">
+            <label class="mb-2 mt-2" for="inputWeekDay">День недели</label>
+            <select id="inputWeekDay" class="form-control" name="dayOfWeek">
+              <option value="">Выберите...</option>
+              <option th:value="${T(java.time.DayOfWeek).MONDAY}" th:text="'Понедельник'"></option>
+              <option th:value="${T(java.time.DayOfWeek).TUESDAY}" th:text="'Вторник'"></option>
+              <option th:value="${T(java.time.DayOfWeek).WEDNESDAY}" th:text="'Среда'"></option>
+              <option th:value="${T(java.time.DayOfWeek).THURSDAY}" th:text="'Четверг'"></option>
+              <option th:value="${T(java.time.DayOfWeek).FRIDAY}" th:text="'Пятница'"></option>
+              <option th:value="${T(java.time.DayOfWeek).SATURDAY}" th:text="'Суббота'"></option>
+              <option th:value="${T(java.time.DayOfWeek).SUNDAY}" th:text="'Воскресенье'"></option>
+            </select>
+          </div>
+
+
+        </div>
+
+        <div  class="row justify-content-center"  style="display: flex; flex-direction: row; margin-bottom: 135px;">
+
+      <div class="row justify-content-center card shadow-sm" id="training-program-table-container"  style="border-top: 1px dotted #A7CDE1;  background-color: transparent; width: 450px; display: none">
+
+        <div class="card-body p-3" style="position: relative; background-color: transparent;">
+
+          <div  style="display: flex; justify-content: center;  width: 100%">
+
+            <div>
+
+
+
+              <div style="display: flex; justify-content: center; border-bottom: 5px solid #000; width: 100%">
+                <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Силовая тренировка</h1>
+              </div>
+
+
+
+              <table class="table table-bordered mt-3" id="table-container1">
+                <thead>
+                <tr>
+                  <th>Упражнение</th>
+                  <th>Вес</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="exercise, stat : ${wrapper.exercisePrograms}">
+                  <td><input class="exerciseName" type="text"  style="width: 80%; height: 60%" th:field="*{exercisePrograms[__${stat.index}__].exerciseName}" /></td>
+                  <td><input class="exerciseWeight" type="number" style="width: 80%; height: 60%" th:field="*{exercisePrograms[__${stat.index}__].weight}" /></td>
+                </tr>
+
+                </tbody>
+              </table>
+
+              <div style="display: flex; justify-content: center; border-bottom: 5px solid #000; border-top: 5px solid #000; width: 100%">
+                <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Кардио тренировка</h1>
+              </div>
+
+
+              <table class="table table-bordered mt-3 " id="table-container2">
+                <thead>
+                <tr>
+                  <th>Упражнение</th>
+                  <th>Нагрузка</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="cardio, stat : ${wrapper.cardioPrograms}">
+                  <td><input type="text" class="cardioName" style="width: 90%; height: 60%" th:field="*{cardioPrograms[__${stat.index}__].cardioName}" /></td>
+                  <td><input type="number" class="cardioWeight" style="width: 90%; height: 60%" th:field="*{cardioPrograms[__${stat.index}__].weight}" max="999"/></td>
+                </tr>
+
+                </tbody>
+              </table>
+
+
+              <div>
+                <button type="submit" class="btn btn-lg btn-primary" style="margin-top: 30px">Сохранить</button>
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+        </div>
+
+    </div>
+    </div>
+    </form>
+
+
+
+
+  </section>
+
+</main>
+
+
+
+</body>
+
+
+
+</html>

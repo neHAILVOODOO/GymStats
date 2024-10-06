@@ -1,0 +1,79 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+
+<head>
+    <title>Главная</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container px-5 my-5">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Наш персонал</h1>
+            </div>
+            <div class="row gx-5">
+
+
+                <div class="text-center mb-5">
+                    <p class="lead fw-normal text-muted mb-0">Тренеры</p>
+                </div>
+
+                <div th:each="user : ${users}" class="col-lg-4 mb-2 d-flex"  style="display: flex; flex-wrap: wrap; justify-content: center;" th:if="${user.role.equals(user.role.TRAINER)}">
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <a th:text="${user.name} + ' ' + ${user.surname}"
+                           class="h3 fw-bolder text-decoration-none link-dark mb-2"
+                           th:href="@{/users/{userId}(userId=${user.id})}">
+                        </a>
+                        <img class="img-fluid rounded-3"
+                             th:src="@{images/}+${user.filename}"
+                             alt="..." width="60%" height="60%"/>
+                    </div>
+                </div>
+
+
+
+                <div class="text-center mb-5 mt-4">
+                    <p class="lead fw-normal text-muted mb-0">Менеджеры</p>
+                </div>
+
+                <div th:each="user : ${users}" class="col-lg-4 mb-2 flex-column align-items-center justify-content-center" th:if="${user.role.equals(user.role.MANAGER)}">
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <a th:text="${user.name} + ' ' + ${user.surname}"
+                           class="h3 fw-bolder text-decoration-none link-dark mb-2"
+                           th:href="@{/users/{userId}(userId=${user.id})}">
+                        </a>
+                        <img class="img-fluid rounded-3"
+                             th:src="@{images/}+${user.filename}"
+                             alt="..." width="60%" height="60%"/>
+                    </div>
+                </div>
+
+
+                <div class="text-center mb-5">
+                    <p class="lead fw-normal text-muted mb-0">Глава компании</p>
+                </div>
+
+                <div th:each="user : ${users}" class="col-lg-4 mb-2" th:if="${user.role.equals(user.role.FOUNDER)}">
+                    <div class="d-flex flex-column align-items-center mb-3">
+                        <a th:text="${user.name} + ' ' + ${user.surname}"
+                           class="h3 fw-bolder text-decoration-none link-dark mb-2"
+                           th:href="@{/users/{userId}(userId=${user.id})}">
+                        </a>
+                        <img class="img-fluid rounded-3"
+                             th:src="@{images/}+${user.filename}"
+                             alt="..." width="60%" height="60%"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

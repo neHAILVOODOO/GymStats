@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+  <title>Профиль</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+
+
+<body class="d-flex flex-column h-100" >
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">Главная</h1>
+      </div>
+
+    </div>
+
+      <div class="main-bg">
+
+        <div class="container1">
+
+        <h1 class="banner-tag">ФИТНЕС-КЛУБ GYMSTATS В НОВОСИБИРСКЕ</h1>
+        <h4 class="banner-text1">Фитнес-клуб GymStats - это просторные тренажерные залы с современным качественным оборудованием,
+        широкий выбор программ тренировок для лиц разных возрастов, опытный и квалифицированный тренерский состав, а также приятная атмосфера.</h4>
+        <h4 class="banner-text1">Занимайся спортом вместе с нами!</h4>
+
+        </div>
+
+      </div>
+
+    <div class="container px-5 my-5 ">
+
+      <div class="facts-container">
+
+      <div class="text-container">
+        <h1 class="facts-tag">8</h1>
+        <h1 class="facts-text">лет работы</h1>
+      </div>
+
+      <div class="text-container">
+        <h1 class="facts-tag">10</h1>
+        <h1 class="facts-text">филиалов</h1>
+      </div>
+
+      <div class="text-container">
+        <h1 class="facts-tag">50 000</h1>
+        <h1 class="facts-text">клиентов</h1>
+      </div>
+
+      <div class="text-container">
+        <h1 class="facts-tag">4,2</h1>
+        <h1 class="facts-text">средняя оценка</h1>
+      </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="container px-5 my-5 " style="border-top: #42aaff solid 4px">
+
+      <div class="text-center mb-5 mt-3">
+        <h1 class="fw-bolder">Новейшие акции</h1>
+      </div>
+
+      <a class="adbanner" th:href="@{/tickets}">
+        <img src="/images/site/adbanner.png">
+      </a>
+
+    </div>
+
+
+    <div class="container px-5 my-5" style="border-top: #42aaff solid 4px">
+
+      <div class="text-center mb-5 mt-5">
+        <h1 class="fw-bolder">Тренировки и услуги</h1>
+      </div>
+
+      <div class="banners-container">
+
+        <div class="banner" style="background-image: url('/images/site/main-banner1.png');">
+          <div class="banner-text second-text" >
+            - Силовые тренировки<br>
+            - Функциональные тренировки<br>
+            - Кардио тренировки<br>
+            - Гимнастика<br>
+            - Смешанные тренироки
+          </div>
+          <div class="banner-tag first-text">ГРУППОВЫЕ ТРЕНИРОВКИ</div>
+        </div>
+
+        <div class="banner" style="background-image: url('/images/site/main-banner2.png');">
+          <div class="banner-text second-text" >
+            - Личный тренер<br>
+            - Обучение техники упражнений<br>
+            - Видимый результат<br>
+            - Программа питания<br>
+            - Индивидуальный подход
+          </div>
+          <div class="banner-tag first-text">ПЕРСОНАЛЬНЫЕ ТРЕНИРОВКИ</div>
+        </div>
+
+        <div class="banner" style="background-image: url('/images/site/main-banner3.png');">
+          <div class="banner-text second-text" >
+            - Оздоровительные тренировки<br>
+            - Комплексные программы<br>
+            - Разнообразные секции<br>
+            - Тренировки на атлетизм и выносливость<br>
+            - Тренировки на гибкость и ловкость
+          </div>
+          <div class="banner-tag first-text">СПОРТ ДЛЯ ДЕТЕЙ</div>
+        </div>
+
+        <div class="banner" style="background-image: url('/images/site/main-banner4.png');">
+          <div class="banner-text second-text" >
+            - Бассейн<br>
+            - Фитнес-бар<br>
+            - Раздевалки и душевые<br>
+            - Магазин спортивных товаров<br>
+            - Сауна
+          </div>
+          <div class="banner-tag first-text">ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ</div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="container px-5 my-5" style="border-top: #42aaff solid 4px">
+
+      <div class="text-center mb-5 mt-5">
+        <h1 class="fw-bolder">Зоны для тренировок</h1>
+      </div>
+
+      <div class="banners-container">
+
+        <div class="banner" style="background-image: url('/images/site/main-zone-banner1.png');">
+          <div class="banner-text second-text" >
+            Зоны занимают 25% от общей площади и оснащены современным оборудованием для занятия кардио тренировками:<br>
+            Беговые дорожки, велотренажеры, степперы, гребные тренажеры, эллиптические тренажеры.
+          </div>
+          <div class="banner-tag first-text">КАРДИОЗОНЫ</div>
+        </div>
+
+
+        <div class="banner" style="background-image: url('/images/site/main-zone-banner2.png');">
+          <div class="banner-text second-text" >
+            Силовые зоны занимают 45% от площади фитнес-клуба, оснащены нагружаемыми и грузоблочными тренажерами.
+          </div>
+          <div class="banner-tag first-text">СИЛОВЫЕ ЗОНЫ</div>
+        </div>
+
+        <div class="banner" style="background-image: url('/images/site/main-zone-banner3.png');">
+          <div class="banner-text second-text" >
+            Зоны занимают около 20% от всего пространства, оборудованы современными хореографическими станками и инвентарем.<br>
+            Здесь проводятся занятия по таким направлениям, как: аэробные тренировки, танцевальные тренировки, Body&Mind тренировки.
+
+          </div>
+          <div class="banner-tag first-text">АЭРОБНЫЕ ЗОНЫ</div>
+        </div>
+
+        <div class="banner" style="background-image: url('/images/site/main-zone-banner4.png');">
+          <div class="banner-text second-text" >
+            Пространство занимает около 10% от всей площади клуба.
+            Здесь вы сможете расслабиться после занятий спортом и отдохнуть.
+            Сюда входят: СПА пространство, кабинеты массажа, абинеты маникюра-педикюра и косметологии, фитнес-кафе.
+
+
+          </div>
+          <div class="banner-tag first-text">ЗОНА ОТДЫХА</div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="container px-5 my-5">
+
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">От разработчика</h1>
+      </div>
+
+      <div>
+        <h1 class="description-tag">GymStats - это проект, совмещающий в себе функции сайта для спортзала и электронного дневника тренировок, разработанный при помощи Java и JavaScript.</h1>
+
+        <div class="description-text">Этот сайт состоит из двух частей: первая - "лицевая",
+          выполненная при помощи HTML и CSS, выполняет исключительно косметическую функцию.
+          Вторая часть - "задняя", состоящая из backend`а. Сделана при помощи Java Spring, JavaScript, MySQL, Thymeleaf и
+          прилегающих инструментов.<br><br>
+
+          На сайте реализовано деление по ролям: "основатель", "менеджер", "тренер" и "пользователь", у каждой роли
+          есть свои возможности.<br><br>
+
+          Основатель назначает менеджеров, которые могут регистрировать аккаунты для пользователей, купивших абонемент,
+          а также создает аккаунты для тренеров, которым может назначать учеников.<br><br>
+
+          Каждому зарегистрированному пользователю доступен их профиль, в котором реализована система дневника тренировок.
+          Занимающиеся могут отмечать выполненные упражнения, записывая их в таблицу, а также, могут
+          сделать себе программу тренировок, тогда дневник будет заполняться автоматически.
+          Также, каждый желающий пользователь может посмотреть статистику по любому выполненому им упражнению.<br><br>
+
+          Тренеры, помимо того, что будут отображаться на лицевой части сайта на вкладке "Персонал", также
+          могут назначать программу тренировок своим ученикам. Для этого тренер должен перейти в свой профиль
+          и выбрать соответствующего пользователя в разделе "Ученики".
+
+
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+  </section>
+
+</main>
+
+</body>
+
+</html>

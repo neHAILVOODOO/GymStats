@@ -1,0 +1,185 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+<head>
+    <title>Редактировать пользвателя</title>
+    <script type="text/javascript" th:src="@{/js/users-profile-edit.js}"></script>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+        <div class="container ">
+            <form role="form" method="post" th:action="@{/users/profile/edit}" th:object="${user}" enctype="multipart/form-data">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-row justify-content-center">
+
+                    <div style="display: flex; width: 100%; margin-bottom: 5px">
+                        <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Основная информация</h1>
+                    </div>
+
+
+                    <div class="form-group col-md-4" style="margin-bottom: 7px">
+                        <label for="name">Изменить имя</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="name"
+                                th:field="*{name}"
+                                name = "name"
+                                placeholder="Имя">
+                        <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+                    </div>
+
+                    <div class="form-group col-md-4" style="margin-bottom: 7px">
+                        <label for="surname">Изменить фамилию</label>
+                        <input
+                                type="text"
+                                class="form-control"
+                                id="surname"
+                                th:field="*{surname}"
+                                name = "surname"
+                                placeholder="Фамилия">
+                        <p th:if="${#fields.hasErrors('surname')}" class="text-danger" th:errors="*{surname}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="login">Изменить логин</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="login"
+                            th:field="*{login}"
+                            name = "login"
+                            placeholder="Логин">
+                    <p th:if="${#fields.hasErrors('login')}" class="text-danger" th:errors="*{login}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="password">Изменить пароль</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="password"
+                            th:field="*{password}"
+                            name = "password"
+                            placeholder="Пароль">
+                    <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <div class="custom-file ">
+                        <label class="custom-file-label" for="customFile">Изменить фото профиля</label>
+                        <input type="file" name="editFile" id="customFile" class="form-control" th:value="${user.filename}">
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="exampleFormControlTextarea1">О себе</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{userDetails.description}"></textarea>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="phone">Номер телефона</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="phone"
+                            th:field="*{userDetails.phone}"
+                            name = "phone"
+                            placeholder="81112223344">
+                    <p th:if="${#fields.hasErrors('userDetails.phone')}" class="text-danger" th:errors="*{userDetails.phone}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="experience">Опыт работы</label>
+                    <input
+                            type="number"
+                            class="experience form-control"
+                            id="experience"
+                            th:field="*{userDetails.experience}"
+                            name = "experience"
+                            placeholder="Опыт работы">
+                    <p th:if="${#fields.hasErrors('userDetails.experience')}" class="text-danger" th:errors="*{userDetails.experience}"></p>
+                </div>
+
+
+                <div style="display: flex; width: 100%; margin-top: 15px; margin-bottom: 5px">
+                    <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Связь с вами</h1>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="tgLink">Email</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="email"
+                            th:field="*{userDetails.email}"
+                            name = "tgLink"
+                            placeholder="@username">
+                    <p th:if="${#fields.hasErrors('userDetails.email')}" class="text-danger" th:errors="*{userDetails.email}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="tgLink">Telegram</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="tgLink"
+                            th:field="*{userDetails.tgLink}"
+                            name = "tgLink"
+                            placeholder="@username">
+                    <p th:if="${#fields.hasErrors('userDetails.tgLink')}" class="text-danger" th:errors="*{userDetails.tgLink}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="instaLink">Instagram</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="instaLink"
+                            th:field="*{userDetails.instaLink}"
+                            name = "instaLink"
+                            placeholder="username">
+                    <p th:if="${#fields.hasErrors('userDetails.instaLink')}" class="text-danger" th:errors="*{userDetails.instaLink}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="vkLink">ВКонтакте</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="vkLink"
+                            th:field="*{userDetails.vkLink}"
+                            name = "vkLink"
+                            placeholder="id">
+                    <p th:if="${#fields.hasErrors('userDetails.vkLink')}" class="text-danger" th:errors="*{userDetails.vkLink}"></p>
+                </div>
+
+                <div class="form-group col-md-4" style="margin-bottom: 7px">
+                    <label for="youtubeLink">YouTube</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="youtubeLink"
+                            th:field="*{userDetails.youtubeLink}"
+                            name = "youtubeLink"
+                            placeholder="username">
+                    <p th:if="${#fields.hasErrors('userDetails.youtubeLink')}" class="text-danger" th:errors="*{userDetails.youtubeLink}"></p>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 15px">Сохранить</button>
+            </form>
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+</html>

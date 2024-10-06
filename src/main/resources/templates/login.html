@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="https://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{layout}">
+
+<head>
+    <title>Spring Security Example </title>
+</head>
+
+    <body class="d-flex flex-column h-100" style="margin-bottom: 143px">
+    <main class="flex-shrink-0">
+        <section layout:fragment="body" class="py-5">
+            <div class="container">
+                <form th:action="@{/login}" role="form" method="post">
+
+                    <div class="form-row" style="margin-top: 40px">
+                        <div class="form-group col-md-4">
+
+                            <h2 class="mb-3"><span class="label label-default">Вход в GymStats</span></h2>
+
+                            <p th:if="${param.error}" style="color: red;">Неверный логин или пароль</p>
+
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="username" placeholder="Введите логин"/>
+                            </div>
+
+    <div class="mb-3">
+         <input type="password" class="form-control" name="password" placeholder="Введите пароль"/>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-primary mb-3" value="Войти"/>
+    </div>
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+    </body>
+</html>

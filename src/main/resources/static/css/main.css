@@ -1,0 +1,220 @@
+.main-bg {
+    background-blend-mode: multiply;
+    background-image: url('/images/site/main-gym-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: rgba(0, 0, 0, 0.8);
+
+
+    height: 600px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    padding-top: 200px;
+}
+
+.container1{
+    display: flex;
+    justify-content: center;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 1000px;
+}
+
+.banner-tag {
+
+    font-family: 'Arial', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+
+    color: white;
+
+    letter-spacing: 1px;
+
+}
+
+.banner-text1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+
+    color: white;
+
+    letter-spacing: 2px;
+    line-height: 1.5;
+
+    margin-top: -40px;
+
+}
+
+.facts-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+
+}
+
+.text-container {
+    justify-content: center;
+}
+
+.facts-tag {
+
+    font-family: 'Arial', sans-serif;
+    font-size: 70px;
+    font-weight: bold;
+
+    color: black;
+
+    letter-spacing: 1px;
+    line-height: 1;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.facts-text {
+
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+
+    color: #42aaff;
+
+
+    letter-spacing: 1px;
+    line-height: 1;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.banners-container {
+    margin-top: 25px;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.banner {
+    margin-top: 15px;
+
+    width: 600px;
+    height: 350px;
+
+
+    background-color: rgba(0, 0, 0, 0.6);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-color 0.5s ease;
+
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 40px;
+
+
+}
+
+
+
+.banner:hover .first-text {
+    opacity: 0;
+}
+
+.banner:hover .second-text {
+    opacity: 1;
+}
+
+.banner:not(:hover) .second-text {
+    opacity: 0;
+}
+
+
+.banner:not(:hover) .first-text {
+    opacity: 1;
+}
+
+.banner-tag {
+
+    font-family: 'Arial', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    transition: opacity 0.3s ease;
+    margin-bottom: 40px
+
+}
+
+.banner-text {
+    height: 567px;
+    
+    padding-top: 115px;
+
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    color: white;
+    transition: opacity 0.3s ease;
+    margin-bottom: 40px
+
+}
+
+.adbanner {
+    width: 1224px;
+    height: 300px;
+}
+
+.description {
+    font-family: 'Arial', sans-serif;
+    font-size: 70px;
+    font-weight: bold;
+
+    color: black;
+
+    letter-spacing: 1px;
+    line-height: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.description-tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+
+    color: black;
+
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+
+    display: flex;
+    justify-content: center;
+}
+
+.description-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 15px;
+
+
+    color: black;
+
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+
+
+
+}
+
+
+

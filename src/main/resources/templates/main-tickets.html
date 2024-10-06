@@ -1,0 +1,92 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+
+<head>
+
+
+  <title>Абонементы</title>
+  <link rel="stylesheet" th:href="@{/css/tickets.css}" />
+
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">Абонементы</h1>
+      </div>
+
+
+      <div class="row">
+
+      <div class="card-container" style="width: 405px; height: 275px;">
+        <div class="card-gradient">
+
+          <div class="card-header">
+            <div class="card-header-button">3 МЕСЯЦА</div>
+            <div class="ticket-text">АБОНЕМЕНТ</div>
+
+          </div>
+          <h2 class="card-title-custom">БЕЗЛИМИТНЫЕ 3 МЕСЯЦА</h2>
+          <p class="card-text-custom">Посещение без ограничений по часам</p>
+
+
+          <button class="card-button">2700 РУБЛЕЙ</button>
+        </div>
+      </div>
+
+
+      <div class="card-container">
+        <div class="card-gradient2">
+
+          <div class="card-header">
+            <div class="card-header-button2">6 МЕСЯЦЕВ</div>
+            <div class="ticket-text">АБОНЕМЕНТ</div>
+
+          </div>
+          <h2 class="card-title-custom">БЕЗЛИМИТНЫЕ 6 МЕСЯЦЕВ</h2>
+          <p class="card-text-custom">Посещение без ограничений по часам</p>
+
+
+          <button class="card-button2">5000 РУБЛЕЙ</button>
+        </div>
+      </div>
+
+
+
+
+      <div class="card-container">
+        <div class="card-gradient3">
+
+          <div class="card-header">
+            <div class="card-header-button3">12 МЕСЯЦЕВ</div>
+            <div class="ticket-text">АБОНЕМЕНТ</div>
+
+          </div>
+          <h2 class="card-title-custom">БЕЗЛИМИТНЫЕ 12 МЕСЯЦЕВ</h2>
+          <p class="card-text-custom">Посещение без ограничений по часам</p>
+
+
+          <button class="card-button3">8000 РУБЛЕЙ</button>
+        </div>
+      </div>
+
+      </div>
+
+
+    </div>
+
+
+
+  </section>
+
+</main>
+
+</body>
+</html>

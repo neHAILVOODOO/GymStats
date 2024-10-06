@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Профиль</title>
+</head>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+      <div class="head_wrap">
+        <h1 th:text="${authUser.name} + ' ' + ${authUser.surname}"></h1>
+      </div>
+    </div>
+
+    <div style="overflow:auto;">
+
+      <div class="container px-5">
+        <div class="nav nav-tabs d-flex justify-content-between"  >
+          <div class="nav-items d-flex">
+            <div class="nav-item">
+              <a th:href="@{/users/profile/info}" class="nav-link">
+                <b class="p1">Профиль</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/diary/{date}(date=${localDate})}" class="nav-link">
+                <b class="p1">Дневник</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/training-program}" class="nav-link">
+                <b class="p1">Программа</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/training-stats}" class="nav-link">
+                <b class="p1">Статистика</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students}" class="nav-link active">
+                <b class="p1">Ученики</b>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container px-5">
+        <div class="nav nav-tabs d-flex justify-content-between" style="background-color: #e3f2fd">
+          <div class="nav-items d-flex">
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students/{userId}/profile(userId=${user.id})}" class="nav-link active">
+                <b class="p1">Профиль ученика</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students/{userId}/diary/{date}(userId=${user.id}, date=${localDate})}" class="nav-link">
+                <b class="p1">Дневник ученика</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students/{userId}/training-program(userId=${user.id})}" class="nav-link">
+                <b class="p1">Программа ученика</b>
+              </a>
+            </div>
+            <div class="nav-item">
+              <a th:href="@{/users/profile/trainer/students/{userId}/training-stats(userId=${user.id})}" class="nav-link">
+                <b class="p1">Статистика ученика</b>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="container mt-3 d-flex" style="width: 1250px; ">
+
+
+      <div class="card shadow-sm" style="border-top: 1px dotted #A7CDE1; position: relative;  width: 20%; height: 20%; background-color: #e3f2fd">
+
+
+        <div class="card-body p-3 d-flex justify-content-center align-items-center" style="position: relative; background-color: transparent;">
+          <img class="img-fluid rounded-3"
+               th:src="@{/images/}+${user.filename}"
+               alt="..." style="max-width: 100%; max-height: 100%;"/>
+        </div>
+
+        <div th:if="${(user.userDetails.vkLink != null and !user.userDetails.vkLink.isEmpty())||
+                (user.userDetails.instaLink != null and !user.userDetails.instaLink.isEmpty() )||
+                (user.userDetails.tgLink != null and !user.userDetails.tgLink.isEmpty() )||
+                (user.userDetails.youtubeLink != null and !user.userDetails.youtubeLink.isEmpty())
+                }" class="card-footer text-center">
+
+          <a class="text-decoration-none font-weight-bold mx-2" style="font-size: 30px" th:if="${user.userDetails.vkLink != null and !user.userDetails.vkLink.isEmpty()}" th:href="'https://vk.com/' + ${user.userDetails.vkLink}" target="_blank">VK</a>
+
+          <a th:if="${user.userDetails.youtubeLink != null and !user.userDetails.youtubeLink.isEmpty()}" th:href="'https://youtube.com/@' + ${user.userDetails.youtubeLink}" target="_blank" class="mx-2">
+            <i class="fab fa-youtube font-size: fa-2x"></i></a>
+
+          <a th:if="${user.userDetails.tgLink != null and !user.userDetails.tgLink.isEmpty()}" th:href="'https://web.telegram.org/k/#' + ${user.userDetails.tgLink}" target="_blank" class="mx-2">
+            <i class="fab fa-telegram font-size: fa-2x"></i></a>
+
+          <a th:if="${user.userDetails.instaLink != null and !user.userDetails.instaLink.isEmpty()}" th:href="'https://instagram.com/' + ${user.userDetails.instaLink}" target="_blank" class="mx-2">
+            <i class="fab fa-instagram font-size: fa-2x"></i></a>
+
+        </div>
+
+
+      </div>
+
+
+
+
+      <div class="card shadow-sm" style="border-top: 1px dotted #A7CDE1; margin-bottom: 150px;  position: relative; background-color: #e3f2fd; width: 100%; margin-left: 20px; height: 350px;">
+        <div class="card-body p-3" style="position: relative; background-color: transparent;">
+          <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;">
+
+            <h1 class="mb-3" style="font-size: 22px";>Информация о пользователе</h1>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1; ">
+                <span>Ф.И.О.</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.name} + ' ' + ${user.surname}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Роль</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.getUserRole(user.role)}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Телефон</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.userDetails.getPhone()}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Электронная почта</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.userDetails.getEmail()}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Опыт работы</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.userDetails.getExperience() + ' ' + user.userDetails.getYearEnding(user.userDetails.getExperience())}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Дата регистрации</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.getCreatedOnDate()}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+
+            <div style="display: flex; width: 100%; border-bottom: 1px solid #A7CDE1;">
+              <div style="background-color: #f0f0f0; padding: 5px; flex: 1;">
+                <span>Последний раз в сети</span>
+              </div>
+              <div style="background-color: #ffffff; padding: 5px; flex: 1;">
+                <h1 th:text="${user.getLastVisitDate()}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm" style="border-top: 1px dotted #A7CDE1; position: relative; background-color: transparent; margin-top: 20px; background-color: #e3f2fd;">
+          <div class="card-body p-3" style="position: relative; background-color: transparent;">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;">
+              <h1 class="mb-3" style="font-size: 18px";>О себе</h1>
+
+
+              <h1 class="text-break" th:if="${user.userDetails.getDescription() != null}" th:text="${user.userDetails.getDescription()}" style="font-size: 16px; margin-top: 0; color: #000;"></h1>
+              <h1 th:unless="${user.userDetails.getDescription() != null}" style="font-size: 16px; margin-top: 0; color: #000;">Описание отсутствует</h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+
+  </section>
+
+</main>
+
+
+
+</body>
+
+
+
+</html>

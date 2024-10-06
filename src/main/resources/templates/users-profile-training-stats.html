@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}">
+<head>
+  <title>Статистика</title>
+
+  <script id="script" th:inline="javascript">
+
+   var parameter = [[${parameter}]];
+    var cardiosByName = [[${cardiosByName}]];
+   var exercisesByName = [[${exercisesByName}]];
+
+
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/users-training-stats.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+</head>
+
+
+
+<body class="d-flex flex-column h-100">
+
+
+
+
+<main class="flex-shrink-0">
+
+
+
+
+  <section layout:fragment="body" class="py-5">
+
+    <div class="container px-5 my-5">
+      <div class="head_wrap">
+        <h1 th:text="${user.name} + ' ' + ${user.surname}"></h1>
+      </div>
+    </div>
+
+    <div style="overflow:auto;">
+
+      <div class="container px-5">
+        <div class="nav nav-tabs d-flex justify-content-start">
+          <div class="nav-item">
+            <a th:href="@{/users/profile/info}" class="nav-link">
+              <b class="p1">Профиль</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/diary/{date}(date=${localDate})}" class="nav-link">
+              <b class="p1">Дневник</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/training-program}" class="nav-link">
+              <b class="p1">Программа</b>
+            </a>
+          </div>
+          <div class="nav-item">
+            <a th:href="@{/users/profile/training-stats}" class="nav-link active">
+              <b class="p1">Статистика</b>
+            </a>
+          </div>
+          <div class="nav-item" sec:authorize="hasAnyRole('ROLE_TRAINER', 'ROLE_FOUNDER')">
+            <a th:href="@{/users/profile/trainer/students}" class="nav-link">
+              <b class="p1">Ученики</b>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <form th:object="${user}" th:action="@{/users/profile/training-stats}" method="post" enctype="multipart/form-data" id="form">
+
+
+      <div class="container d-flex justify-content-center" style="flex-direction: row; width:1250px;">
+
+        <div class="container align-items-left" style=" margin-left: auto; margin-right: auto;">
+
+          <div class="row">
+
+          <div class="row" style=" width: 1000px; display: flex; flex-direction: row;">
+
+            <div class="field col-md-4" style="width: 300px; margin-bottom: 20px;">
+              <label class="mb-2 mt-2" for="inputTrainingType">Тип тренировки</label>
+              <select id="inputTrainingType" class="form-control" name="inputTrainingType">
+                <option value="">Выберите...</option>
+                <option th:value="'EXERCISE'" th:text="'Силовая'"></option>
+                <option th:value="'CARDIO'" th:text="'Кардио'"></option>
+              </select>
+            </div>
+
+            <div class="field col-md-4" id="inputExerciseNameContainer" style="width: 300px; margin-bottom: 20px; display: none">
+              <label class="mb-2 mt-2" for="inputExerciseName">Упражнение</label>
+              <select id="inputExerciseName" class="form-control" name="inputExerciseName">
+                <option value="">Выберите...</option>
+                <th:block th:each="exercise : ${exercises}">
+                  <option th:value="${exercise.exerciseName}"  th:text="${exercise.exerciseName}"></option>
+                </th:block>
+              </select>
+            </div>
+
+            <div class="field col-md-4" id="inputExerciseParameterContainer" style="width: 300px; margin-bottom: 20px; display: none">
+              <label class="mb-2 mt-2" for="inputExerciseParameter">Параметр</label>
+              <select id="inputExerciseParameter" class="form-control" name="inputExerciseParameter">
+                <option value="">Выберите...</option>
+                <option th:value="'Weight'" th:text="'Вес'"></option>
+                <option th:value="'Set1'" th:text="'Первый подход'"></option>
+                <option th:value="'Set2'" th:text="'Второй подход'"></option>
+                <option th:value="'Set3'" th:text="'Третий подход'"></option>
+                <option th:value="'Set4'" th:text="'Четвертый подход'"></option>
+              </select>
+            </div>
+
+
+            <div class="field col-md-4" id="inputCardioNameContainer" style="width: 300px; margin-bottom: 20px; display: none">
+              <label class="mb-2 mt-2" for="inputCardioName">Кардио</label>
+              <select id="inputCardioName" class="form-control" name="inputCardioName">
+                <option value="">Выберите...</option>
+                <th:block th:each="cardio : ${cardios}">
+                  <option th:value="${cardio.cardioName}"  th:text="${cardio.cardioName}"></option>
+                </th:block>
+              </select>
+            </div>
+
+            <div class="field col-md-4" id="inputCardioParameterContainer" style="width: 300px; margin-bottom: 20px; display: none">
+              <label class="mb-2 mt-2" for="inputCardioParameter">Параметр</label>
+              <select id="inputCardioParameter" class="form-control" name="inputCardioParameter">
+                <option value="">Выберите...</option>
+                <option th:value="'Distance'" th:text="'Пройденная дистанция'"></option>
+                <option th:value="'Time'" th:text="'Потраченное время'"></option>
+                <option th:value="'Calories'" th:text="'Сожженные калории'"></option>
+                <option th:value="'Pulse'" th:text="'Пульс'"></option>
+              </select>
+            </div>
+
+
+          </div>
+
+            <div class="col-md-3" id="averageBar" style="display: none">
+              <h1 style="font-size: 26px; text-align: left; vertical-align: top; ">В среднем:</h1>
+            </div>
+
+
+          </div>
+
+          <div  class="row justify-content-center"  style="display: flex; flex-direction: row; margin-bottom: 135px;">
+
+            <div class="card shadow-sm" style="border-top: 1px dotted #A7CDE1;   background-color: transparent;">
+
+            <canvas id="myChart"></canvas>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </form>
+
+
+
+  </section>
+
+</main>
+
+
+
+</body>
+
+
+
+</html>

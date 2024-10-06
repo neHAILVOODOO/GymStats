@@ -1,0 +1,86 @@
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="https://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+
+<head>
+  <title>Главная</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+  <section layout:fragment="body" class="py-5">
+    <div class="container px-5 my-5">
+      <div class="text-center mb-5">
+        <h1 class="fw-bolder">Управление аккаунтами</h1>
+      </div>
+      <div class="row gx-5">
+        <div>
+          <form th:action="@{/users/search}" class="form-inline my-2 my-lg-0 mb-3">
+            <input name="query" class="form-control me-sm-2 mb-5" type="search" placeholder="Найти сотрудника" aria-label="Search">
+          </form>
+        </div>
+
+        <div class="text-center mb-5">
+          <p class="lead fw-normal text-muted mb-0">Пользователи</p>
+        </div>
+
+        <div th:each="user: ${users} " class="col-lg-6 mb-2" th:if="${user.role.equals(user.role.STUDENT)}">
+          <div class="position-relative mb-3">
+            <a th:text="${user.name} + ' ' + ${user.surname}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="${user.id}">Project name</a>
+          </div>
+          <a class="btn btn-primary" th:href="@{/users/{userId}(userId=${user.id})}">Смотреть</a>
+          <a class="btn btn-primary" th:href="@{/users/{userId}/edit(userId=${user.id})}">Изменить</a>
+        </div>
+
+
+        <div class="text-center mb-5 mt-4">
+          <p class="lead fw-normal text-muted mb-0">Тренеры</p>
+        </div>
+
+        <div th:each="user: ${users} " class="col-lg-6 mb-2" th:if="${user.role.equals(user.role.TRAINER)}">
+          <div class="position-relative mb-3">
+            <a th:text="${user.name} + ' ' + ${user.surname}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+          </div>
+          <a class="btn btn-primary" th:href="@{/users/{userId}(userId=${user.id})}">Смотреть</a>
+          <a class="btn btn-primary" th:href="@{/users/{userId}/edit(userId=${user.id})}">Изменить</a>
+        </div>
+
+
+
+        <div class="text-center mb-5 mt-4">
+          <p class="lead fw-normal text-muted mb-0">Менеджеры</p>
+        </div>
+
+
+
+        <div th:each="user: ${users} " class="col-lg-6 mb-2" th:if="${user.role.equals(user.role.MANAGER)}">
+          <div class="position-relative mb-3 mt-4">
+            <a th:text="${user.name} + ' ' + ${user.surname}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" th:href="@{/users/{userId}(userId=${user.id})}">Project name</a>
+          </div>
+          <a class="btn btn-primary" th:href="@{/users/{userId}(userId=${user.id})}">Смотреть</a>
+          <a class="btn btn-primary" th:href="@{/users/{userId}/edit(userId=${user.id})}">Изменить</a>
+        </div>
+
+
+        <div class="text-center mb-5">
+          <p class="lead fw-normal text-muted mb-0">Глава компании</p>
+        </div>
+
+        <div th:each="user: ${users} " class="col-lg-6 mb-2" th:if="${user.role.equals(user.role.FOUNDER)}">
+          <div class="position-relative mb-3">
+            <a th:text="${user.name} + ' ' + ${user.surname}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+          </div>
+          <a class="btn btn-primary" th:href="@{/users/{userId}(userId=${user.id})}">Смотреть</a>
+          <a class="btn btn-primary" th:href="@{/users/{userId}/edit(userId=${user.id})}">Изменить</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

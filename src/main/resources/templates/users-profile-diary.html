@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}">
+<head>
+    <title>Дневник</title>
+    <script type="text/javascript" th:src="@{/js/users-profile-diary.js}"></script>
+</head>
+</head>
+
+<body class="d-flex flex-column h-100">
+<main class="flex-shrink-0">
+    <section layout:fragment="body" class="py-5">
+
+        <div class="container px-5 my-5">
+            <div class="head_wrap">
+                <h1 th:text="${user.name} + ' ' + ${user.surname}"></h1>
+            </div>
+        </div>
+
+        <div style="overflow:auto;">
+
+            <div class="container px-5">
+                <div class="nav nav-tabs d-flex justify-content-start">
+                    <div class="nav-item">
+                        <a th:href="@{/users/profile/info}" class="nav-link">
+                            <b class="p1">Профиль</b>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a th:href="@{/users/profile/diary/{date}(date=${currentDate})}" class="nav-link active">
+                            <b class="p1">Дневник</b>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a th:href="@{/users/profile/training-program}" class="nav-link">
+                            <b class="p1">Программа</b>
+                        </a>
+                    </div>
+                    <div class="nav-item" >
+                        <a th:href="@{/users/profile/training-stats}" class="nav-link">
+                            <b class="p1">Статистика</b>
+                        </a>
+                    </div>
+                    <div class="nav-item" sec:authorize="hasAnyRole('ROLE_TRAINER', 'ROLE_FOUNDER')">
+                        <a th:href="@{/users/profile/trainer/students}" class="nav-link">
+                            <b class="p1">Ученики</b>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container "  style="display: flex; flex-direction: row;">
+
+
+
+        <div  class="container mt-3 d-flex" style="width: 1250px; margin-left: 23px " >
+
+            <div class="card shadow-sm" style="border-top: 1px dotted #A7CDE1; margin-bottom: 150px;  background-color: transparent; width: 1250px; ">
+
+
+
+                <div class="card-body p-3" style="position: relative; background-color: transparent;">
+
+
+
+
+                    <div style="display: flex; justify-content: center;  width: 100%">
+
+
+                        <form th:object="${wrapper}" th:action="@{/users/profile/diary/{date}(date=${currentDate})}" method="post" enctype="multipart/form-data">
+
+                            <div style="display: flex; justify-content: space-between; border-bottom: 5px solid #000; padding-bottom: 10px; width: 100%">
+
+                                <div style="display: flex; justify-content: space-between;">
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; " th:text="'Дата: ' + ${currentDate}"></h1>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between;">
+
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">ПН</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">ВТ</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">СР</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">ЧТ</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">ПТ</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top; margin-right: 25px ">СБ</h1>
+                                    <h1 style="font-size: 26px; text-align: left; vertical-align: top;  ">ВС</h1>
+
+                                </div>
+
+
+                                <div class="form-group d-flex align-items-center " style="font-size: 24px;"> <label for="todayWeight">Ваш вес</label>
+                                    <input
+                                            type="number"
+                                            class="form-control"
+                                            style="margin-left: 10px; width: 120px"
+                                            id="todayWeight"
+                                            th:field="*{todayWeight}"
+                                            placeholder="Вес"
+                                            max="999">
+
+                                </div>
+
+                            </div>
+
+                            <div style="display: flex; justify-content: center; border-bottom: 5px solid #000; width: 100%">
+                                <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Силовая тренировка</h1>
+                            </div>
+
+
+
+                            <table class="table table-bordered mt-3 ">
+                                <thead>
+                                <tr>
+                                    <th>Упражнение</th>
+                                    <th>Вес</th>
+                                    <th>1 Подход</th>
+                                    <th>2 Подход</th>
+                                    <th>3 Подход</th>
+                                    <th>4 Подход</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="exercise, stat : ${wrapper.exercises}">
+                                    <td><input type="text" class="exerciseName" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].exerciseName}" /></td>
+                                    <td><input type="number" class="exerciseWeight" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].weight}"  /></td>
+                                    <td><input type="number" class="exerciseSet1" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].set1}" /></td>
+                                    <td><input type="number" class="exerciseSet2" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].set2}" /></td>
+                                    <td><input type="number" class="exerciseSet3" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].set3}" /></td>
+                                    <td><input type="number" class="exerciseSet4" style="width: 80%; height: 60%" th:field="*{exercises[__${stat.index}__].set4}" /></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                            <div style="display: flex; justify-content: center; border-bottom: 5px solid #000; border-top: 5px solid #000; width: 100%">
+                                <h1 style="font-size: 26px; text-align: center; vertical-align: top; margin-top: 4px">Кардио тренировка</h1>
+                            </div>
+
+
+                            <table class="table table-bordered mt-3 ">
+                                <thead>
+                                <tr>
+                                    <th>Упражнение</th>
+                                    <th>Дистанция (М)</th>
+                                    <th>Время (Мин.)</th>
+                                    <th>Нагрузка</th>
+                                    <th>Калории</th>
+                                    <th>Пульс</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="cardio, stat : ${wrapper.cardios}">
+                                    <td><input class="cardioName" type="text" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].cardioName}" /></td>
+                                    <td><input class="cardioDistance" type="number" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].distance}" /></td>
+                                    <td><input class="cardioTime" type="number" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].time}" /></td>
+                                    <td><input class="cardioWeight" type="number" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].weight}" /></td>
+                                    <td><input class="cardioCalories" type="number" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].calories}" /></td>
+                                    <td><input class="cardioPulse" type="number" style="width: 90%; height: 60%" th:field="*{cardios[__${stat.index}__].pulse}" /></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+
+                            <div class="form-group d-flex align-items-center justify-content-between" style="border-top: 5px solid #000; border-bottom: 5px solid #000;">
+
+                                <a th:text="Предыдущая"
+                                   class="h3 fw-bolder text-decoration-none link-dark mb-2"
+                                   style="margin-top: 4px; margin-bottom: 4px"
+                                   th:href="@{/users/profile/diary/{date}(date=${prevDate})}"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="Предыдущая">
+                                </a>
+
+                                <a th:text="Следующая"
+                                   class="h3 fw-bolder text-decoration-none link-dark mb-2"
+                                   style="margin-top: 4px; margin-bottom: 4px"
+                                   th:href="@{/users/profile/diary/{date}(date=${nextDate})}"
+                                   data-bs-toggle="tooltip"
+                                   data-bs-placement="top"
+                                   title="Следующая">
+                                </a>
+
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-lg btn-primary" style="margin-top: 30px">Сохранить</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+                <div style="margin-top: 17px">
+                        <input type="date" class="form-control" id="date" name="date" required="required" style="margin-left: 5px; width: 200px" th:value="${currentDate}" >
+                    <a id="link" class="btn btn-lg btn-primary" style="margin-left: 5px; margin-top: 5px" href="#">Перейти</a>
+                </div>
+
+</div>
+
+    </section>
+
+</main>
+
+
+</body>
+
+
+
+</html>
