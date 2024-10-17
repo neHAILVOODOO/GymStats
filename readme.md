@@ -22,3 +22,12 @@
 - CSS
 - JavaScript
 <hr>
+
+
+(Аккаунт ученика)
+Login: test
+Password: test
+
+(Аккаунт тренера)
+Login: test2
+Password: test2
