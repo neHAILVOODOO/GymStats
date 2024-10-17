@@ -16,4 +16,9 @@
 - Spring Security
 - MySQL
 - Hibernate
+- Thymeleaf
+- Maven
+- HTML
+- CSS
+- JavaScript
 <hr>
