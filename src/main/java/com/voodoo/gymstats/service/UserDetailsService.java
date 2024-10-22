@@ -26,9 +26,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         User user = userRepository.findByLogin(login);
 
         if (user == null) {
-            System.out.println("ошибочка в userdetails");
             throw new UsernameNotFoundException("Пользователь не найден с логином: " + login);
-
         }
 
         user.setLastVisitDate(LocalDate.now());

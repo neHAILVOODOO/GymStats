@@ -10,8 +10,11 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -118,24 +121,34 @@ public class MainController {
         return "redirect:/users";
     }
 
-    @GetMapping("/users/{userId}")
-    public String userDetail(@PathVariable("userId") long userId, @AuthenticationPrincipal User authUser, Model model) {
+        @GetMapping("/users/{userId}")
+        public String userDetail(@PathVariable("userId") long userId, Authentication authentication, Model model) {
 
-        User user = userService.findById(userId);
-        List<User> trainerStudents = userService.findStudentsByTrainerId(userId);
+            User user = userService.findById(userId);
 
-        if (authUser.getLogin().equals(user.getLogin())) {
-            return "redirect:/users/profile/info";
+            if (authentication != null && authentication.isAuthenticated()) {
+
+                User authUser = (User) authentication.getPrincipal();
+
+                if (authUser.getId().equals(user.getId())) {
+                    return "redirect:/users/profile/info";
+                }
+
+            }
+
+
+            List<User> trainerStudents = userService.findStudentsByTrainerId(userId);
+
+
+            if (!trainerStudents.isEmpty()) {
+                model.addAttribute("trainerStudents", trainerStudents);
+            }
+            model.addAttribute("user", user);
+
+
+            return "main-users-detail";
+
         }
-
-        if (!trainerStudents.isEmpty()) {
-            model.addAttribute("trainerStudents", trainerStudents);
-        }
-        model.addAttribute("user", user);
-
-
-        return "main-users-detail";
-    }
 
     @PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_FOUNDER')")
     @GetMapping("/admin/users")
