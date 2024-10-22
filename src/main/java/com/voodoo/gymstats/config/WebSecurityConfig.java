@@ -24,6 +24,10 @@ public class WebSecurityConfig  {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/users").permitAll()
+                        .requestMatchers("/users/{userid}").permitAll()
+                        .requestMatchers("/tickets").permitAll()
+                        .requestMatchers("/contacts").permitAll()
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/users/new").authenticated()
                         .anyRequest().authenticated()
